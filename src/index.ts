@@ -3,6 +3,7 @@ import * as express from 'express'
 import * as cors from 'cors'
 import * as bodyParser from 'body-parser'
 import { userRouter } from './routers/user.router'
+import { todoRouter } from './routers/todo.router'
 import { tokenGuard } from './middlewares/token-guard'
 import { sequelize } from "./instances/sequelize"
 
@@ -13,6 +14,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 app.use('/', userRouter)
+app.use('/', todoRouter)
 
 // Unprotected Get
 app.get('/some-resource', (req, res, next) => {

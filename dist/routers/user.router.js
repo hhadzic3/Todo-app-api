@@ -10,7 +10,7 @@ const user_1 = require("../models/user");
 exports.userRouter = (0, express_1.Router)();
 const userService = new user_service_1.UserService();
 // GET
-exports.userRouter.get('/', (req, res) => {
+exports.userRouter.get('/users', (req, res) => {
     user_1.User.findAll({
         attributes: {
             exclude: ['password']

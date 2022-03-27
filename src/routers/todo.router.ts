@@ -5,9 +5,12 @@ import { Todo, TodoAddModel } from '../models/todo'
 export const todoRouter = Router()
 
 // GET
-todoRouter.get('/todos', (req, res) => {
-    Todo.findAll()
-        .then(todos => res.json(todos)).catch(err => {
+todoRouter.get('/todos/:id', (req, res) => {
+    Todo.findAll({
+        where: {
+            userId: req.params.id
+        }
+    }).then(todos => res.json(todos)).catch(err => {
             console.log(err)
           })
 });

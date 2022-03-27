@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const user_router_1 = require("./routers/user.router");
+const todo_router_1 = require("./routers/todo.router");
 const token_guard_1 = require("./middlewares/token-guard");
 const sequelize_1 = require("./instances/sequelize");
 const app = express();
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/', user_router_1.userRouter);
+app.use('/', todo_router_1.todoRouter);
 // Unprotected Get
 app.get('/some-resource', (req, res, next) => {
     res.json('Hello World');

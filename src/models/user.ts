@@ -28,10 +28,4 @@ export const User = sequelize.define('users', {
     },
     email: Sequelize.STRING,
     password: Sequelize.STRING
-})
-
-User.hasMany(Todo, {
-    foreignKey: {
-        name: 'userId'
-    }
 });

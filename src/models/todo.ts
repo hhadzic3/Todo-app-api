@@ -34,11 +34,4 @@ export const Todo = sequelize.define('todos', {
     },
     todoText: Sequelize.STRING,
     completed: Sequelize.BOOLEAN
-})
-
-Todo.belongsTo(User, {
-    as: 'usersTodoList',
-    foreignKey: {
-        name: 'userId'
-    }
 });
