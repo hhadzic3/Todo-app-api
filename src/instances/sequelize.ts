@@ -1,6 +1,6 @@
 //import { Sequelize } from 'sequelize'
-import * as Sequelize from 'sequelize'
-
+//import * as Sequelize from 'sequelize'
+const { Sequelize } = require("sequelize");
 const db = 'expressapp'
 const username = 'root'
 const password = 'root'
