@@ -1,22 +1,15 @@
-require('dotenv').config();
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize(`${process.env.DB_URL}`) 
-const path = require('path');
+//import { Sequelize } from 'sequelize'
+import * as Sequelize from 'sequelize'
 
-const db = {};
+const db = 'expressapp'
+const username = 'root'
+const password = 'root'
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
-db.Op = Sequelize.Op;
+export const sequelize = new Sequelize("postgres://pufbjveg:bPoqp6Es7jIMfJDC26FgNgk07YWIvKfD@rogue.db.elephantsql.com/pufbjveg");
 
-// Importing modals
-// for sequlize > 6.0.0 importing will be like this:
-// db.users = require(path.join(__dirname + '/users.js'))(sequelize, Sequelize.DataTypes)
+sequelize.authenticate()
 
-db.users = sequelize.import(path.join(__dirname , '/users.js'));
-db.todos = sequelize.import(path.join(__dirname , '/todos.js'));
-
-
+/*
 // 1) Asociation 
 db.users.hasMany(db.todos, {
     foreignKey: {
@@ -29,5 +22,4 @@ db.todos.belongsTo(db.users, {
         name: 'user_id'
     }
 });
-
-module.exports = db;
+*/
