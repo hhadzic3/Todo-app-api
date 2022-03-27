@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize'
 import { sequelize } from '../instances/sequelize'
-
+import { Todo } from '../models/todo'
 
 export interface UserAddModel {
     email: string
@@ -29,3 +29,9 @@ export const User = sequelize.define('users', {
     email: Sequelize.STRING,
     password: Sequelize.STRING
 })
+
+User.hasMany(Todo, {
+    foreignKey: {
+        name: 'userId'
+    }
+});

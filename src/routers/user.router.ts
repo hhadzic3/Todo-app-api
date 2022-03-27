@@ -11,7 +11,7 @@ export const userRouter = Router()
 const userService = new UserService()
 
 // GET
-userRouter.get('/', (req, res) => {
+userRouter.get('/users', (req, res) => {
     User.findAll({
             attributes: {
                 exclude: ['password']

@@ -1,9 +1,9 @@
 //import { Sequelize } from 'sequelize'
 //import * as Sequelize from 'sequelize'
 const { Sequelize } = require("sequelize");
-const db = 'expressapp'
-const username = 'root'
-const password = 'root'
+//const db = 'expressapp'
+//const username = 'root'
+//const password = 'root'
 
 export const sequelize = new Sequelize("postgres://pufbjveg:bPoqp6Es7jIMfJDC26FgNgk07YWIvKfD@rogue.db.elephantsql.com/pufbjveg");
 
