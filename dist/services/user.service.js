@@ -18,8 +18,7 @@ class UserService {
     register({ email, password }) {
         return bcrypt.hash(password, this._saltRounds)
             .then(hash => {
-            return user_1.User.create({ email, password: hash })
-                .then(u => this.getUserById(u.id));
+            return user_1.User.create({ email, password: hash });
         });
     }
     login({ email }) {

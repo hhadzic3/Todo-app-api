@@ -4,6 +4,7 @@ import * as cors from 'cors'
 import * as bodyParser from 'body-parser'
 import { userRouter } from './routers/user.router'
 import { tokenGuard } from './middlewares/token-guard'
+import { sequelize } from "./instances/sequelize"
 
 const app = express()
 const port = 4001
@@ -26,4 +27,16 @@ app.get('/some-protected-resource', (req, res, next) => {
 
 app.listen(port, () => {
     console.log(`App is listening on port ${port}`)
+    sequelize.authenticate().then(async() => {
+        console.log("database connected")
+
+        try {
+            await sequelize.sync({force: true})
+        } catch (error) {
+            console.log(error.message)
+        }
+
+    }).catch( (e: any) => {
+        console.log(e.message)
+    })
 })

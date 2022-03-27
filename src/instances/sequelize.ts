@@ -7,7 +7,8 @@ const password = 'root'
 
 export const sequelize = new Sequelize("postgres://pufbjveg:bPoqp6Es7jIMfJDC26FgNgk07YWIvKfD@rogue.db.elephantsql.com/pufbjveg");
 
-sequelize.authenticate()
+
+//sequelize.authenticate()
 
 /*
 // 1) Asociation 

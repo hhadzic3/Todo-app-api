@@ -7,7 +7,12 @@ const db = 'expressapp';
 const username = 'root';
 const password = 'root';
 exports.sequelize = new Sequelize("postgres://pufbjveg:bPoqp6Es7jIMfJDC26FgNgk07YWIvKfD@rogue.db.elephantsql.com/pufbjveg");
-exports.sequelize.authenticate();
+/*
+export const sequelize = new Sequelize(db, username, password, {
+  dialect: "mysql",
+  port: 3306,
+});*/
+//sequelize.authenticate()
 /*
 // 1) Asociation
 db.users.hasMany(db.todos, {

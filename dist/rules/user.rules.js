@@ -7,8 +7,8 @@ const user_1 = require("../models/user");
 exports.userRules = {
     forRegister: [
         (0, check_1.check)('email')
-            .isEmail().withMessage('Invalid email format')
-            .custom(email => user_1.User.find({ where: { email } }).then(u => !!!u)).withMessage('Email exists'),
+            .isEmail().withMessage('Invalid email format'),
+        //.custom(email => User.find({ where: { email } }).then(u => !!!u)).withMessage('Email exists'),
         (0, check_1.check)('password')
             .isLength({ min: 8 }).withMessage('Invalid password'),
         (0, check_1.check)('confirmPassword')

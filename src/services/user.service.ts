@@ -19,7 +19,6 @@ export class UserService {
         return bcrypt.hash(password, this._saltRounds)
             .then(hash => {
                 return User.create({ email, password: hash })
-                    .then(u => this.getUserById(u!.id))
             })
     }
 

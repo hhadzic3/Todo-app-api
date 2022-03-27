@@ -1,5 +1,6 @@
-/*create database expressapp;*/
-use pufbjveg;
+create database expressapp;
+use expressapp;
+/*use pufbjveg;*/
 
 create table users(
 id int auto_increment primary key,
@@ -8,6 +9,8 @@ password text not null,
 createdAt datetime,
 updatedAt datetime
 );
+
+insert into users values (123,"bbhasj@dasd.ba","basjhcbjhas");
 /*
 create table todos(
 id int auto_increment primary key,
