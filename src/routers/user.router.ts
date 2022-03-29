@@ -1,11 +1,11 @@
 
 import { Router } from 'express'
-import { matchedData } from 'express-validator/filter'
-
-import { validationResult } from 'express-validator/check'
+const { matchedData } = require('express-validator')
+const { validationResult } = require('express-validator')
 import { userRules } from '../rules/user.rules'
 import { UserService } from '../services/user.service'
 import { User, UserAddModel } from '../models/user'
+import * as bcrypt from 'bcrypt'
 
 export const userRouter = Router()
 const userService = new UserService()
@@ -36,11 +36,19 @@ userRouter.post('/register', userRules['forRegister'], (req, res) => {
       })
 })
 
-userRouter.post('/login', userRules['forLogin'], (req, res) => {
+userRouter.post('/login', userRules['forLogin'], async (req, res) => {
     const errors = validationResult(req)
 
     if (!errors.isEmpty())
         return res.status(422).json(errors.array())
+
+    const user = await User.findOne({email: req.body.email});
+    if (!user) return res.status(400).send('Invalid Email or Password.')
+    
+    console.log(user)
+
+    const validPassword = await bcrypt.compare(req.body.password, user.password);
+    if (!validPassword) return res.status(400).send('Invalid Email or Password.')
 
     const payload = matchedData(req) as UserAddModel
     const token = userService.login(payload)

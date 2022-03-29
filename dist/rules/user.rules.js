@@ -1,28 +1,36 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userRules = void 0;
-const bcrypt = require("bcrypt");
-const check_1 = require("express-validator/check");
 const user_1 = require("../models/user");
+const { check } = require('express-validator');
+const express_validator_1 = require("express-validator");
+const isValidUser = email => {
+    return user_1.User.findAll({ where: { email } }).then((user) => {
+        if (!(typeof user !== "undefined" && user.length == 0)) {
+            return Promise.reject('E-mail already in use');
+        }
+    });
+};
+const emailExists = email => {
+    return user_1.User.findAll({ where: { email } }).then((user) => {
+        if ((typeof user !== "undefined" && user.length == 0)) {
+            return Promise.reject('E-mail does not exits');
+        }
+    });
+};
 exports.userRules = {
     forRegister: [
-        (0, check_1.check)('email')
-            .isEmail().withMessage('Invalid email format'),
-        //.custom(email => User.find({ where: { email } }).then(u => !!!u)).withMessage('Email exists'),
-        (0, check_1.check)('password')
-            .isLength({ min: 8 }).withMessage('Invalid password'),
-        (0, check_1.check)('confirmPassword')
+        check('email').isEmail().withMessage('Invalid email format'),
+        (0, express_validator_1.body)('email').custom(isValidUser),
+        check('password').isLength({ min: 8 }).withMessage('Invalid password'),
+        check('confirmPassword')
             .custom((confirmPassword, { req }) => req.body.password === confirmPassword).withMessage('Passwords are different')
     ],
+    // TODO: Password is not checked properly
     forLogin: [
-        (0, check_1.check)('email')
-            .isEmail().withMessage('Invalid email format')
-            .custom(email => user_1.User.findOne({ where: { email } }).then(u => !!u)).withMessage('Invalid email or password'),
-        (0, check_1.check)('password')
-            .custom((password, { req }) => {
-            return user_1.User.findOne({ where: { email: req.body.email } })
-                .then(u => bcrypt.compare(password, u.password));
-        }).withMessage('Invalid email or password')
+        check('email')
+            .isEmail().withMessage('Invalid email format'),
+        (0, express_validator_1.body)('email').custom(emailExists)
     ]
 };
 //# sourceMappingURL=user.rules.js.map
